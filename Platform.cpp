@@ -20,7 +20,8 @@ void clearScreen()
 }
 
 #ifndef _WIN32
-int getchWrapper() {
+int getchWrapper() 
+{
     struct termios oldt, newt;
     int ch;
     tcgetattr(STDIN_FILENO, &oldt);
@@ -32,7 +33,8 @@ int getchWrapper() {
     return ch;
 }
 #else
-int getchWrapper() {
+int getchWrapper() 
+{
     return _getch();
 }
 #endif
@@ -47,3 +49,34 @@ void setupLocale()
     std::locale::global(std::locale("pl_PL.UTF-8"));
 #endif
 }
+
+
+#ifndef _WIN32
+#include <fcntl.h>
+int kbhitWrapper() 
+{
+    struct termios oldt, newt;
+    int ch;
+    int oldf;
+    
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    
+    oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+    fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+    
+    ch = getchar();
+    
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    fcntl(STDIN_FILENO, F_SETFL, oldf);
+    
+    if(ch != EOF) 
+    {
+        ungetc(ch, stdin);
+        return 1;
+    }
+    return 0;
+}
+#endif
