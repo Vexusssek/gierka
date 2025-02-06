@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "Istota.h"
 #include "Kostka.h"
-#include <conio.h>
+#include "Platform.h"
 
 class Walka 
 {
