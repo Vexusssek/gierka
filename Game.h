@@ -1,6 +1,7 @@
 #pragma once
 #include "Map.h"
 #include "Player.h"
+#include "Platform.h"
 #include <vector>
 #include <cstdlib>
 #include <ctime>
