@@ -2,6 +2,7 @@
 #include "Istota.h"
 #include "Ekwipunek.h"
 #include "CharacterStats.h"
+#include "Platform.h"
 #include "Skills.h"
 #include <vector>
 
