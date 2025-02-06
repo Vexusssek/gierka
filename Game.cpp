@@ -81,8 +81,7 @@ void Game::tryChangeRoom(int x, int y)
 
 void Game::handleInput() 
 {
-    #ifdef _WIN32
-    if (_kbhit()) 
+    if (kbhitWrapper()) 
     {
         char input = getchWrapper();
         int newX = player->getX();
@@ -255,7 +254,6 @@ void Game::handleInput()
             }
         }
     }
-    #endif
 }
 
 void Game::update() 
@@ -273,7 +271,7 @@ void Game::render()
     clearScreen();
     printf("\n\n");
     currentRoom->print();
-    printf("\nSterowanie: WASD - ruch, E - podnies przedmiot/Akcja, Q - wyjscie R - walcz\n");
+    printf("\nSterowanie: WASD - ruch, E - podnieś przedmiot/aktywność, Q - wyjscie R - walcz\n");
     printf("Pozycja gracza: %d,%d\n", player->getX(), player->getY());
     printf("Pokoj %zu/%zu\n", currentRoomIndex + 1, rooms.size());
     printf("Piętro: %d\n", currentFloor);
