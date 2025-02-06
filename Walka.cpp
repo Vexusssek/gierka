@@ -24,7 +24,7 @@ bool Walka::rozpocznijWalke(Player& player, Istota& przeciwnik)
             printf("2. Użyj umiejętności\n");
         }
 
-        char choice = _getch();
+        char choice = getchWrapper();
         if(choice == '1') 
         {
             if(player.attackSys(przeciwnik)) 
@@ -49,7 +49,7 @@ bool Walka::rozpocznijWalke(Player& player, Istota& przeciwnik)
         {
             player.displaySkills();
             printf("Wybierz umiejętność (1-%zu): ", player.getSkillsCount());
-            char skillChoice = _getch();
+            char skillChoice = getchWrapper();
             int skillIndex = skillChoice - '1';
             
             if(player.useSkill(skillIndex, przeciwnik)) 
