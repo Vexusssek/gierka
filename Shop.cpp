@@ -5,7 +5,6 @@
 #include "Platform.h"
 #include <cstdlib>
 #include <cstdio>
-#include <conio.h>
 
 Shop::Shop() 
 {
